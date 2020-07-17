@@ -4,9 +4,32 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"article_read"}}
+ *          },
+ *          "post"={
+ *              "normalization_context"={"groups"={"article_post"}}
+ *          },
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"article_details_read"}}
+ *         },
+ *         "put"={
+ *             "normalization_context"={"groups"={"article_details_put"}}
+ *         },
+ *         "delete"
+ *     }
+ * )
  */
 class Article
 {
@@ -18,27 +41,33 @@ class Article
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=author::class, inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="articles")
+     * @Groups({"article_read", "article_post", "article_details_read", "article_details_put"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"author_details_read", "article_read", "article_post", "article_details_read", "article_details_put"})
+     *
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"article_post", "article_details_read", "article_details_put"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"author_details_read", "article_read", "article_post", "article_details_read", "article_details_put"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"author_details_read", "article_read", "article_post", "article_details_read", "article_details_put"})
      */
     private $updatedAt;
 
