@@ -6,9 +6,31 @@ use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"author_read"}}
+ *          },
+ *          "post"={
+ *              "normalization_context"={"groups"={"author_post"}}
+ *          },
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"author_details_read"}}
+ *         },
+ *         "put"={
+ *             "normalization_context"={"groups"={"author_details_put"}}
+ *         },
+ *         "delete"
+ *     }
+ * )
  */
 class Author
 {
@@ -21,16 +43,19 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"article_read", "article_details_read", "author_read", "author_post", "author_details_read", "author_details_put"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"article_details_read", "author_read", "author_post", "author_details_read", "author_details_put"})
      */
     private $lastname;
 
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="author")
+     * @Groups({"author_post", "author_details_read", "author_details_put"})
      */
     private $articles;
 
