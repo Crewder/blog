@@ -37,6 +37,7 @@ class Article
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"article_read", "article_details_read"})
      */
     private $id;
 

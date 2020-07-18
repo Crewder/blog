@@ -38,6 +38,7 @@ class Author
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"author_read", "author_details_read"})
      */
     private $id;
 
