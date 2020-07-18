@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -72,6 +74,21 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     */
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="article")
+     */
+    private $commentary;
+
+    public function __construct()
+    {
+        $this->commentary = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -133,6 +150,49 @@ class Article
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCategory(): ?category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|commentary[]
+     */
+    public function getCommentary(): Collection
+    {
+        return $this->commentary;
+    }
+
+    public function addCommentary(commentary $commentary): self
+    {
+        if (!$this->commentary->contains($commentary)) {
+            $this->commentary[] = $commentary;
+            $commentary->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentary(commentary $commentary): self
+    {
+        if ($this->commentary->contains($commentary)) {
+            $this->commentary->removeElement($commentary);
+            // set the owning side to null (unless already changed)
+            if ($commentary->getArticle() === $this) {
+                $commentary->setArticle(null);
+            }
+        }
 
         return $this;
     }
