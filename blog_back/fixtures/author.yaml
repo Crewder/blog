@@ -1,0 +1,5 @@
+# api/fixtures/author.yaml
+App\Entity\Author:
+  author_{1..10}:
+    firstname: <name()>
+    lastname: <name()>
