@@ -23,11 +23,13 @@ class DeleteArticle extends Component{
 
     render() {
         return (
-            <div>
+            <div className="article-crud">
                 <h2>Suppression d'un article</h2>
                 <p>Etes-vous sûr de vouloir supprimer cet article ?</p>
-                <button onClick={this.deleteArticle}>Oui</button>
-                <button><Link to="/articles">Non</Link></button>
+                <div className="confirm-delete">
+                    <button className="btn btn-danger" onClick={this.deleteArticle}>Oui</button>
+                    <button className="btn btn-secondary"><Link to="/articles">Non</Link></button>
+                </div>
             </div>
         );
     }

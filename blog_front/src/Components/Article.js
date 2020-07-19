@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import API from '../utils/API';
+import * as Icon from 'react-feather';
 import {
     BrowserRouter as Router,
     Switch,
@@ -25,7 +26,7 @@ class Article extends Component{
 
     render() {
         return (
-            <div>
+            <div className="list">
                 <h2>Liste des articles</h2>
                 <table id="articleTable" border="1px">
                     <thead>
@@ -46,14 +47,14 @@ class Article extends Component{
                                 <td>{(new Date(article.createdAt)).toLocaleDateString()}</td>
                                 <td>{(new Date(article.updatedAt)).toLocaleDateString()}</td>
                                 <td><Link to={`article/${article.id}`}>Voir plus</Link></td>
-                                <td><Link to={`article/update/${article.id}`}>Modifier</Link></td>
-                                <td><Link to={`article/delete/${article.id}`}>Supprimer</Link></td>
+                                <td><Link to={`article/update/${article.id}`}><Icon.Edit /></Link></td>
+                                <td><Link to={`article/delete/${article.id}`}><Icon.Trash2 /></Link></td>
                             </tr>
                         )
                     }
                     </tbody>
                 </table>
-                <button><Link to={`createArticle`}>Créer un article</Link></button>
+                <button className="btn btn-primary"><Link to={`createArticle`}>Créer un article</Link></button>
             </div>
         );
     }

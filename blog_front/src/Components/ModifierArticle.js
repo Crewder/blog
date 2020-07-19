@@ -47,16 +47,20 @@ class ModifierArticle extends Component{
 
     render() {
         return (
-            <div>
+            <div className="article-crud">
                 <h2>Modification d'un article</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Title :</label>
-                    <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                    <div className="form-group">
+                        <label>Title :</label>
+                        <input  className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                    </div>
 
-                    <label>Content :</label>
-                    <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                    <div className="form-group">
+                        <label>Content :</label>
+                        <input  className="form-control" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                    </div>
 
-                    <input type="submit" value="Envoyer" />
+                    <input class="btn btn-primary" type="submit" value="Modifier" />
                 </form>
             </div>
         );
