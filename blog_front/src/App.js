@@ -11,6 +11,9 @@ import {
 import Home from "./Components/Home";
 import Article from "./Components/Article";
 import ArticleDetails from "./Components/ArticleDetails";
+import CreateArticle from "./Components/CreateArticle";
+import ModifierArticle from "./Components/ModifierArticle";
+import DeleteArticle from "./Components/DeleteArticle";
 
 class App extends Component{
     constructor(props) {
@@ -49,6 +52,11 @@ class App extends Component{
                             <Route path="/articles">
                                 <Article />
                             </Route>
+                            <Route path="/createArticle">
+                                <CreateArticle />
+                            </Route>
+                            <Route path={`/article/update/:id`} render={(props) => <ModifierArticle {...props}/>}/>
+                            <Route path={`/article/delete/:id`} render={(props) => <DeleteArticle {...props}/>}/>
                             <Route path={`/article/:id`} render={(props) => <ArticleDetails {...props}/>}/>
                             <Route path="/">
                                 <Home />
