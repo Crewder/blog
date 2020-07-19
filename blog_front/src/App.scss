@@ -1,0 +1,75 @@
+body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: whitesmoke;
+}
+
+#root{
+  width: 100%;
+}
+
+.App{
+  text-align: center;
+  height: 100vh;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+nav{
+  background: lightblue;
+  height: 7%;
+  ul{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    li{
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      a{
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+}
+
+.list{
+  height: 93%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button{
+  a{
+    color: white;
+    &:hover{
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
+form{
+  width: 50%;
+}
+
+.article-crud{
+  height: 93%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .confirm-delete{
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+  }
+}

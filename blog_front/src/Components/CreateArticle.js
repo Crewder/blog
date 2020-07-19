@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import API from '../utils/API';
 
+
 class CreateArticle extends Component{
     constructor(props) {
         super(props);
@@ -22,7 +23,6 @@ class CreateArticle extends Component{
     async componentDidMount() {
         let authorData = await API.get('/authors');
         authorData = authorData.data["hydra:member"];
-        console.log(authorData);
         this.setState({authors: authorData});
     }
 
@@ -48,25 +48,29 @@ class CreateArticle extends Component{
 
     render() {
         return (
-            <div>
+            <div className="article-crud">
                 <h2>Création d'un article</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Auteurs :</label>
-                    <select value={this.state.author} name="author" onChange={this.handleChange}>
-                        {
-                            this.state.authors.map(author =>
-                                <option key={author.id} value={author["@id"]}  >{author.firstname}</option>
-                            )
-                        }
-                    </select>
+                    <div className="form-group">
+                        <label>Auteurs :</label>
+                        <select className="form-control" value={this.state.author} name="author" onChange={this.handleChange}>
+                            {
+                                this.state.authors.map(author =>
+                                    <option key={author.id} value={author["@id"]}  >{author.firstname}</option>
+                                )
+                            }
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Titre :</label>
+                        <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label>Contenu :</label>
+                        <input className="form-control" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                    </div>
 
-                    <label>Title :</label>
-                    <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-
-                    <label>Content :</label>
-                    <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
-
-                    <input type="submit" value="Envoyer" />
+                    <input class="btn btn-primary" type="submit" value="Envoyer" />
                 </form>
             </div>
         );

@@ -25,7 +25,7 @@ class ArticleDetails extends Component{
 
     render() {
         return (
-            <div>
+            <div className="list">
                 <h2>Détails de l'article {this.props.match.params.id}</h2>
 
                 <table id="articleDetailsTable" border="1px">

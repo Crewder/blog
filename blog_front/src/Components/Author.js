@@ -18,7 +18,7 @@ class Author extends Component{
 
     render() {
         return (
-            <div>
+            <div className="list">
                 <h2>Liste des auteurs</h2>
                 <table id="authorsTable" border="1px">
                     <thead>

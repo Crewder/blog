@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Author from "./Components/Author";
-import './App.css';
+import './App.scss';
 import {
     BrowserRouter as Router,
     Switch,
@@ -26,9 +26,7 @@ class App extends Component{
     render() {
         return (
             <div className="App">
-                <h1>Blog Symfony - React</h1>
                 <Router>
-                    <div>
                         <nav>
                             <ul>
                                 <li>
@@ -62,7 +60,6 @@ class App extends Component{
                                 <Home />
                             </Route>
                         </Switch>
-                    </div>
                 </Router>
             </div>
         );
